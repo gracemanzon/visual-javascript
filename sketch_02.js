@@ -21,18 +21,21 @@ const sketch = () => {
     const w = width * 0.01;
     const h = height * 0.1;
 
-    // square
-    context.save();
-    context.translate(x, y);
-    // context.rotate(0.3);
-    // ^ computed in radians not degrees
-    context.rotate(degToRad(45));
-    // ^ rotating by degree after conversion in function degToRad
+    const num = 12;
+    for (i = 0; i < num; i++) {
+      const slice = degToRad(360 / num);
+      const angle = slice * i;
 
-    context.beginPath();
-    context.rect(-w * 0.5, -h * 0.5, w, h);
-    context.fill();
-    context.restore();
+      // square
+      context.save();
+      context.translate(x, y);
+      context.rotate(angle);
+
+      context.beginPath();
+      context.rect(-w * 0.5, -h * 0.5, w, h);
+      context.fill();
+      context.restore();
+    }
   };
 };
 
