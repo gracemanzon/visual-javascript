@@ -2,7 +2,7 @@
   "name": "visual-javascript",
   "version": "1.0.0",
   "description": "",
-  "main": "sketch.js",
+  "main": "sketch_01.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
