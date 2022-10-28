@@ -16,11 +16,21 @@ const sketch = () => {
     const w = width * 0.3;
     const h = height * 0.3;
 
+    // square
+    context.save();
     context.translate(x, y);
     context.rotate(0.3);
 
     context.beginPath();
     context.rect(-w * 0.5, -h * 0.5, w, h);
+    context.fill();
+    context.restore();
+
+    // circle - demoing how translate is culmulative and needs a save and restore to localize them
+    context.translate(100, 400);
+
+    context.beginPath();
+    context.arc(0, 0, 50, 0, Math.PI * 2);
     context.fill();
   };
 };
