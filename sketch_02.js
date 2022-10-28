@@ -17,9 +17,10 @@ const sketch = () => {
     const h = height * 0.3;
 
     context.translate(x, y);
+    context.rotate(0.3);
 
     context.beginPath();
-    context.rect(0, 0, w, h);
+    context.rect(-w * 0.5, -h * 0.5, w, h);
     context.fill();
   };
 };
