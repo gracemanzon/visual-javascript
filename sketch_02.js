@@ -21,7 +21,7 @@ const sketch = () => {
     const h = height * 0.1;
     let x, y; // declare with let to modify inside of loop
 
-    const num = 30;
+    const num = 36;
     const radius = width * 0.3; // radius of the invisible circle that the rectangles will center around
 
     for (let i = 0; i < num; i++) {
