@@ -9,6 +9,11 @@ const degToRad = (degrees) => {
 };
 // ^ function to convert degrees to radians
 
+const randomRange = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
+// ^ creates a sample range between given numbers
+
 const sketch = () => {
   return ({ context, width, height }) => {
     context.fillStyle = "white";
@@ -38,6 +43,8 @@ const sketch = () => {
       context.save();
       context.translate(x, y);
       context.rotate(-angle);
+      context.scale(randomRange(0.5, 3), 1);
+      // ^ uses randomRange function to produce rectangles with varying scale (x(min, max), y)
 
       context.beginPath();
       context.rect(-w * 0.5, -h * 0.5, w, h);
