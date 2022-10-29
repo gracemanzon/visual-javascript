@@ -1,18 +1,10 @@
 const canvasSketch = require("canvas-sketch");
+const math = require("canvas-sketch-util/math");
+const random = require("canvas-sketch-util/random");
 
 const settings = {
   dimensions: [1080, 1080],
 };
-
-const degToRad = (degrees) => {
-  return (degrees / 180) * Math.PI;
-};
-// ^ function to convert degrees to radians
-
-const randomRange = (min, max) => {
-  return Math.random() * (max - min) + min;
-};
-// ^ creates a sample range between given numbers
 
 const sketch = () => {
   return ({ context, width, height }) => {
@@ -32,7 +24,7 @@ const sketch = () => {
     const radius = width * 0.3; // radius of the invisible circle that the rectangles will center around
 
     for (let i = 0; i < num; i++) {
-      const slice = degToRad(360 / num);
+      const slice = math.degToRad(360 / num);
       const angle = slice * i;
 
       x = cx + radius * Math.sin(angle);
@@ -43,7 +35,7 @@ const sketch = () => {
       context.save();
       context.translate(x, y);
       context.rotate(-angle);
-      context.scale(randomRange(0.5, 3), 1);
+      context.scale(random.range(0.5, 3), 1);
       // ^ uses randomRange function to produce rectangles with varying scale (x(min, max), y)
 
       context.beginPath();
