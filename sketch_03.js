@@ -38,13 +38,20 @@ class Point {
 class Agent {
   constructor(x, y) {
     this.pos = new Point(x, y);
-    this.radius = 10;
+    this.radius = random.range(4, 12);
   }
 
   draw(context) {
+    context.save();
+    context.translate(this.pos.x, this.pos.y);
+
+    context.lineWidth = 4;
+
     context.beginPath();
-    context.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2);
-    context.fillStyle = "black";
+    context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.fill();
+    context.stroke();
+
+    context.restore();
   }
 }
