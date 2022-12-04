@@ -1,5 +1,6 @@
 const canvasSketch = require("canvas-sketch");
-import random from "canvas-sketch-util/random";
+const random = require("canvas-sketch-util/random");
+const math = require("canvas-sketch-util/math");
 
 const settings = {
   dimensions: [1080, 1080],
@@ -43,6 +44,9 @@ const sketch = ({ context, width, height }) => {
           continue;
         }
         // ^ 7. if distance between agent and other is greater than 200 then do not execute the remainder of the code in the loop, just continue to the next iteration
+
+        context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
+        // ^ 9. set line width based on distance (range from 0 to 200 when distance is 0 the width should be 12, when distance is 200 the width should be 1)
 
         context.beginPath();
         // ^ 1. create new path
