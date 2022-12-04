@@ -36,6 +36,14 @@ const sketch = ({ context, width, height }) => {
       for (let j = i + 1; j < agents.length; j++) {
         const other = agents[j];
 
+        const dist = agent.pos.getDistance(other.pos);
+        // ^ 6. get distance between agent.pos and other.pos
+
+        if (dist > 200) {
+          continue;
+        }
+        // ^ 7. if distance between agent and other is greater than 200 then do not execute the remainder of the code in the loop, just continue to the next iteration
+
         context.beginPath();
         // ^ 1. create new path
         context.moveTo(agent.pos.x, agent.pos.y);
@@ -63,6 +71,13 @@ class Vector {
     this.x = x;
     this.y = y;
   }
+
+  getDistance(v) {
+    const dx = this.x - v.x;
+    const dy = this.y - v.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  // ^ 5. getDistance method
 }
 
 class Agent {
