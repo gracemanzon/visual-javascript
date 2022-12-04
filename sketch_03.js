@@ -30,6 +30,24 @@ const sketch = ({ context, width, height }) => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
 
+    for (let i = 0; i < agents.length; i++) {
+      const agent = agents[i];
+
+      for (let j = i + 1; j < agents.length; j++) {
+        const other = agents[j];
+
+        context.beginPath();
+        // ^ 1. create new path
+        context.moveTo(agent.pos.x, agent.pos.y);
+        // ^ 2. move the "pen" to the beginning of the path
+        context.lineTo(other.pos.x, other.pos.y);
+        // ^ 3. determine the end point for the line
+        context.stroke();
+        // ^ 4. with let j = 0; -> since there are 40 agents there are 1600 iterations on each frame (40x40), the loop is checking 0 to 0, 1 to 1, etc. so there is technically double lines on top of each other, the computer can do it but it's really unneccesary. by changing to let j = i + 1; the iterations are reduced to 780 and increases performance
+      }
+    }
+    // ^ nested loop that iterates over every other agent for each agent
+
     agents.forEach((agent) => {
       agent.update();
       agent.draw(context);
