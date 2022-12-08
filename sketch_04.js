@@ -18,13 +18,35 @@ const sketch = () => {
     const gridHeight = height * 0.8;
     // ^ define grid boundaries
 
-    const cellWidth = width / columns;
-    const cellHeight = height / rows;
+    const cellWidth = gridWidth / columns;
+    const cellHeight = gridHeight / rows;
     // ^ define cell specs
 
     const marginX = (width - gridWidth) * 0.5;
     const marginY = (height - gridHeight) * 0.5;
     // ^ define margins - difference between grid boundaries and canvas
+
+    for (let i = 0; i < cells; i++) {
+      const col = i % columns;
+      const row = Math.floor(i / columns);
+
+      const x = col * cellWidth;
+      const y = row * cellHeight;
+      const w = cellWidth * 0.8;
+      const h = cellHeight * 0.8;
+
+      context.save();
+      context.translate(x, y);
+      context.translate(marginX, marginY);
+      context.translate(cellWidth * 0.5, cellHeight * 0.5);
+
+      context.beginPath();
+      context.moveTo(w * -0.5, 0);
+      context.lineTo(w * 0.5, 0);
+      context.stroke();
+
+      context.restore();
+    }
   };
 };
 
