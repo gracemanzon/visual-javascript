@@ -9,8 +9,8 @@ const sketch = () => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
 
-    const columns = 4;
-    const rows = 3;
+    const columns = 16;
+    const rows = 16;
     const cells = columns * rows;
     // ^ define grid specs
 
@@ -39,6 +39,8 @@ const sketch = () => {
       context.translate(x, y);
       context.translate(marginX, marginY);
       context.translate(cellWidth * 0.5, cellHeight * 0.5);
+
+      context.lineWidth = 4;
 
       context.beginPath();
       context.moveTo(w * -0.5, 0);
