@@ -39,7 +39,7 @@ const sketch = () => {
       const w = cellWidth * 0.8;
       const h = cellHeight * 0.8;
 
-      const n = random.noise2D(x + frame * 10, y, 0.001);
+      const n = random.noise2D(x + frame * 12, y, 0.001);
       // ^ generate random number equal to n and use to set the angle of rotation of the lines of the grid, noise2D retursn a numbers between -1 and 1, when mutltiples by Math.PI we get the equivalent of -180 degrees to 180 degrees. the third value is a frequency value, the 4th possible value is amplitude (frequency = mulitples the coordinates by that value, amplitude = multiples the output result by that value, doing so here would change possible range for n to -0.2 to 0.2, altneratively the angle could be multiple by 0.2)
       const angle = n * Math.PI * 0.2;
       // const scale = ((n + 1) / 2) * 30;
