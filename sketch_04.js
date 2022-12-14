@@ -1,4 +1,5 @@
 const canvasSketch = require("canvas-sketch");
+const random = require("canvas-sketch-util/random");
 
 const settings = {
   dimensions: [1080, 1080],
@@ -35,10 +36,15 @@ const sketch = () => {
       const w = cellWidth * 0.8;
       const h = cellHeight * 0.8;
 
+      const n = random.noise2D(x, y);
+      // ^ generate random number equal to n and use to set the angle of rotation of the lines of the grid, noise2D retursn a numbers between -1 and 1, when mutltiples by Math.PI we get the equivalent of -180 degrees to 180 degrees
+      const angle = n * Math.PI;
+
       context.save();
       context.translate(x, y);
       context.translate(marginX, marginY);
       context.translate(cellWidth * 0.5, cellHeight * 0.5);
+      context.rotate(angle);
 
       context.lineWidth = 4;
 
