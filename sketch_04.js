@@ -1,5 +1,6 @@
 const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
+const math = require("canvas-sketch-util/math");
 
 const settings = {
   dimensions: [1080, 1080],
@@ -36,9 +37,12 @@ const sketch = () => {
       const w = cellWidth * 0.8;
       const h = cellHeight * 0.8;
 
-      const n = random.noise2D(x, y);
-      // ^ generate random number equal to n and use to set the angle of rotation of the lines of the grid, noise2D retursn a numbers between -1 and 1, when mutltiples by Math.PI we get the equivalent of -180 degrees to 180 degrees
-      const angle = n * Math.PI;
+      const n = random.noise2D(x, y, 0.001);
+      // ^ generate random number equal to n and use to set the angle of rotation of the lines of the grid, noise2D retursn a numbers between -1 and 1, when mutltiples by Math.PI we get the equivalent of -180 degrees to 180 degrees. the third value is a frequency value, the 4th possible value is amplitude (frequency = mulitples the coordinates by that value, amplitude = multiples the output result by that value, doing so here would change possible range for n to -0.2 to 0.2, altneratively the angle could be multiple by 0.2)
+      const angle = n * Math.PI * 0.2;
+      // const scale = ((n + 1) / 2) * 30;
+      // ^ noise can also be used to affect the scale, the basic arithmetic is performed to map the range to 0 to 1 so that there are not negative values for the size of the lines, alternatively we can use canvas-sketch mapRange function
+      const scale = math.mapRange(n, -1, 1, 1, 30);
 
       context.save();
       context.translate(x, y);
@@ -46,7 +50,7 @@ const sketch = () => {
       context.translate(cellWidth * 0.5, cellHeight * 0.5);
       context.rotate(angle);
 
-      context.lineWidth = 4;
+      context.lineWidth = scale;
 
       context.beginPath();
       context.moveTo(w * -0.5, 0);
