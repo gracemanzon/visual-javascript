@@ -14,8 +14,8 @@ const params = {
   rows: 10,
   scaleMin: 1,
   scaleMax: 30,
-  freq: 0.001,
-  amp: 0.2,
+  frequency: 0.001,
+  amplitude: 0.2,
 };
 // ^ create object for pane defaults
 
@@ -56,8 +56,8 @@ const sketch = () => {
       // const angle = n * Math.PI * 0.2;
       // // const scale = ((n + 1) / 2) * 30;
       // // ^ noise can also be used to affect the scale, the basic arithmetic is performed to map the range to 0 to 1 so that there are not negative values for the size of the lines, alternatively we can use canvas-sketch mapRange function
-      const n = random.noise2D(x + frame * 12, y, params.freq);
-      const angle = n * Math.PI * params.amp;
+      const n = random.noise2D(x + frame * 12, y, params.frequency);
+      const angle = n * Math.PI * params.amplitude;
       // ^^ replace frequency and amplitude values with params from pane
       const scale = math.mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
       // ^^ replace values for scale minimum and maximum with the params from pane
@@ -93,8 +93,8 @@ const createPane = () => {
   // ^ create objects from parameters for folder and objects determining the range for each object
 
   folder = pane.addFolder({ title: "Noise " });
-  folder.addInput(params, "freq", { min: -0.01, max: 0.01 });
-  folder.addInput(params, "amp", { min: 0, max: 1 });
+  folder.addInput(params, "frequency", { min: -0.01, max: 0.01 });
+  folder.addInput(params, "amplitude", { min: 0, max: 1 });
 };
 
 createPane();
