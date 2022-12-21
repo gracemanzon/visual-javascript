@@ -9,15 +9,22 @@ const settings = {
   // ^ allow animation and use the frame property to start
 };
 
+const params = {
+  cols: 10,
+  rows: 10,
+};
+// ^ create object for pane
+
 const sketch = () => {
   return ({ context, width, height, frame }) => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
 
-    const columns = 16;
-    const rows = 16;
+    const columns = params.cols;
+    const rows = params.rows;
     const cells = columns * rows;
     // ^ define grid specs
+    // ^^ update columns and rows to use params from the pane
 
     const gridWidth = width * 0.8;
     const gridHeight = height * 0.8;
@@ -67,6 +74,13 @@ const sketch = () => {
 
 const createPane = () => {
   const pane = new Tweakpane.Pane();
+  // ^ create empty pane
+  let folder;
+  // ^ UI component for pane
+  folder = pane.addFolder({ title: "Grid " });
+  folder.addInput(params, "cols", { min: 2, max: 50, step: 1 });
+  folder.addInput(params, "rows", { min: 2, max: 50, step: 1 });
+  // ^ create objects from parameters for folder and objects determining the range for each object
 };
 
 createPane();
