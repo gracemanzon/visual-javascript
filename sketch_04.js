@@ -16,6 +16,8 @@ const params = {
   scaleMax: 30,
   frequency: 0.001,
   amplitude: 0.2,
+  animate: true,
+  frame: 0,
 };
 // ^ create object for pane defaults
 
@@ -51,6 +53,9 @@ const sketch = () => {
       const w = cellWidth * 0.8;
       const h = cellHeight * 0.8;
 
+      const f = params.animate ? frame : params.frame;
+      // ^ ternary operator -> single line conditional expression for frame when conditional is true and params.frame else
+
       // const n = random.noise2D(x + frame * 12, y, 0.001);
       // // ^ generate random number equal to n and use to set the angle of rotation of the lines of the grid, noise2D retursn a numbers between -1 and 1, when mutltiples by Math.PI we get the equivalent of -180 degrees to 180 degrees. the third value is a frequency value, the 4th possible value is amplitude (frequency = mulitples the coordinates by that value, amplitude = multiples the output result by that value, doing so here would change possible range for n to -0.2 to 0.2, altneratively the angle could be multiple by 0.2)
       // const angle = n * Math.PI * 0.2;
@@ -58,7 +63,7 @@ const sketch = () => {
       // // ^ noise can also be used to affect the scale, the basic arithmetic is performed to map the range to 0 to 1 so that there are not negative values for the size of the lines, alternatively we can use canvas-sketch mapRange function
 
       // const n = random.noise2D(x + frame * 12, y, params.frequency);
-      const n = random.noise3D(x, y, frame * 12, params.frequency);
+      const n = random.noise3D(x, y, f * 12, params.frequency);
       // ^^^ replaces noise2d to reduce left to right motion flow and give the animation a more organic look
       const angle = n * Math.PI * params.amplitude;
       // ^^ replace frequency and amplitude values with params from pane
@@ -98,6 +103,10 @@ const createPane = () => {
   folder = pane.addFolder({ title: "Noise " });
   folder.addInput(params, "frequency", { min: -0.01, max: 0.01 });
   folder.addInput(params, "amplitude", { min: 0, max: 1 });
+
+  folder.addInput(params, "animate");
+  // ^ automatically a boolean
+  folder.addInput(params, "frame", { min: 0, max: 999 });
 };
 
 createPane();
