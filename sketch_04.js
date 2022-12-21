@@ -58,8 +58,8 @@ const sketch = () => {
       // // ^ noise can also be used to affect the scale, the basic arithmetic is performed to map the range to 0 to 1 so that there are not negative values for the size of the lines, alternatively we can use canvas-sketch mapRange function
 
       // const n = random.noise2D(x + frame * 12, y, params.frequency);
-
       const n = random.noise3D(x, y, frame * 12, params.frequency);
+      // ^^^ replaces noise2d to reduce left to right motion flow and give the animation a more organic look
       const angle = n * Math.PI * params.amplitude;
       // ^^ replace frequency and amplitude values with params from pane
       const scale = math.mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
